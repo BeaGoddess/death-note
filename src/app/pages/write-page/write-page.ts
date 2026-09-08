@@ -1,10 +1,10 @@
-import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { interval, map, take } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CountdownFormatPipe } from '../../pipes/countdown-format-pipe';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, CountdownFormatPipe],
   selector: 'app-write-page',
   styleUrl: './write-page.scss',
   templateUrl: './write-page.html',
@@ -50,11 +50,15 @@ export class WritePage {
     if (!this.name.trim()) return;
 
     const causes = [
-      'tripped over a rake while running from responsibilities',
+      'being tripped over a rake while running from responsibilities',
       'laughing at their own joke',
-      "defeated by a jar that wouldn't open",
-      'by ambition (and a sandwich)',
-      'lost a staring contest with the sun',
+      "being defeated by a jar that wouldn't open",
+      'ambition (and a sandwich)',
+      'losing a staring contest with the sun',
+      'being eaten by a shark',
+      'working too hard and falling asleep at their desk',
+      'playing too much video games and forgetting to eat',
+      'playing League of Legends and randomly dying',
     ];
     this.causeOfDeath = causes[Math.floor(Math.random() * causes.length)];
     this.hasWritten.set(true);

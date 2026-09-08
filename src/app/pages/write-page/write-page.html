@@ -20,8 +20,8 @@
     <p
       class="result mb-6 text-lg text-center bg-shinigami-700 px-6 py-4 rounded-lg shadow max-w-md"
     >
-      <strong class="text-shinigami-300 font-bold">{{ name }} </strong>
-      <span class="italic">{{ causeOfDeath }}</span> in {{ countdown() }} seconds.
+      <strong class="text-shinigami-300 font-bold">{{ name }} </strong> will die by
+      <span class="italic">{{ causeOfDeath }}</span> in {{ countdown() | countdownFormat }}.
     </p>
     <button
       (click)="reset()"

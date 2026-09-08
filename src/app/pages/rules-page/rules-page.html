@@ -1,0 +1,23 @@
+<div
+  class="font-death-note rules-page max-w-xl border border-shinigami-700 mx-auto mt-8 p-8 bg-shinigami-900 rounded-md shadow-lg"
+>
+  <h1 class="text-4xl mb-6 text-center text-shinigami-100 tracking-wide font-bold">Rules</h1>
+  <h3 class="text-2xl mb-10 text-center text-shinigami-100 tracking-wide font-bold">
+    How to use the Death Note
+  </h3>
+  @if (rules.length > 0) {
+    <ul class="list-none p-0 m-0">
+      @for (rule of rules; let i = $index; track rule) {
+        <li class="mb-5 text-shinigami-100 text-xl relative flex items-start">
+          <span
+            class="mr-3 text-shinigami-400 text-4xl font-extrabold select-none deathnote-letter-style"
+            >#{{ i + 1 }}</span
+          >
+          <span>{{ rule }}</span>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="text-center text-shinigami-500 text-base italic">No rules yet. Chaos reigns.</p>
+  }
+</div>
