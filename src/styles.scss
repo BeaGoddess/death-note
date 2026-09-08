@@ -1,1 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'tailwindcss';
+
+@font-face {
+    font-family: 'DeathNote';
+    src: url('/death-note.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+  --font-death-note: 'DeathNote', sans-serif;
+  --color-void: #0d0d0f;
+  --color-charcoal: #1c1b1f;
+
+  --color-blood-100: #fde3e5;
+  --color-blood-200: #f9c1c6;
+  --color-blood-300: #f28d96;
+  --color-blood-400: #e85c68;
+  --color-blood-500: #d43142;
+  --color-blood-600: #c81d2a;
+  --color-blood-700: #a3131e;
+  --color-blood-800: #7d0f18;
+  --color-blood-900: #4a0910;
+
+  --color-mustard-100: #fdf1de;
+  --color-mustard-200: #fbe0b3;
+  --color-mustard-300: #f7c877;
+  --color-mustard-400: #f2b84f;
+  --color-mustard-500: #e0a52e;
+  --color-mustard-600: #c98a1e;
+  --color-mustard-700: #a66d16;
+  --color-mustard-800: #7d5211;
+  --color-mustard-900: #543609;
+
+  --color-shinigami-100: #f1ebfa;
+  --color-shinigami-200: #ddccf0;
+  --color-shinigami-300: #c3a8e3;
+  --color-shinigami-400: #a684d1;
+  --color-shinigami-500: #8b68b8;
+  --color-shinigami-600: #6d4a9c;
+  --color-shinigami-700: #573b80;
+  --color-shinigami-800: #402c5f;
+  --color-shinigami-900: #2a1d3f;
+
+  --color-ash-100: #f5f4f2;
+  --color-ash-200: #e5e3df;
+  --color-ash-300: #cfccc6;
+  --color-ash-400: #a8a29b;
+  --color-ash-500: #8b857c;
+  --color-ash-600: #726c63;
+  --color-ash-700: #58534b;
+  --color-ash-800: #403c36;
+  --color-ash-900: #282521;
+
+  --color-bone: #f5f1ea;
+}
+
+html, body {
+    background-color: var(--color-void);
+    color: var(--color-bone);
+}
+
+h1 {
+    @apply font-death-note text-4xl;
+}
