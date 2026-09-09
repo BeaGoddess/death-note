@@ -1,0 +1,14 @@
+<div class="flex items-center justify-between gap-4 py-4">
+  <div class="min-w-0">
+    <p class="truncate font-death-note text-2xl tracking-wide text-ash-900">
+      {{ victim().name }}
+    </p>
+    <p class="text-sm italic text-ash-600">{{ victim().causeOfDeath }}</p>
+  </div>
+  <button
+    (click)="onRevive()"
+    class="mt-1 shrink-0 text-sm text-mustard-700 transition-colors hover:text-blood-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-mustard-500"
+  >
+    Revive
+  </button>
+</div>

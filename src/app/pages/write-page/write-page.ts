@@ -1,7 +1,8 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { interval, map, take } from 'rxjs';
 import { CountdownFormatPipe } from '../../pipes/countdown-format-pipe';
+import { VictimsService } from '../../services/victims';
 
 @Component({
   imports: [FormsModule, CountdownFormatPipe],
@@ -10,6 +11,8 @@ import { CountdownFormatPipe } from '../../pipes/countdown-format-pipe';
   templateUrl: './write-page.html',
 })
 export class WritePage {
+  private victimsService = inject(VictimsService); // inject the victims service
+
   name = '';
   causeOfDeath = '';
   hasWritten = signal(false);
@@ -61,6 +64,7 @@ export class WritePage {
       'playing League of Legends and randomly dying',
     ];
     this.causeOfDeath = causes[Math.floor(Math.random() * causes.length)];
+    this.victimsService.addVictim(this.name, this.causeOfDeath);
     this.hasWritten.set(true);
   }
 

@@ -1,33 +1,49 @@
-<div class="write-page flex flex-col items-center justify-center min-h-screen px-4 py-10 gap-6">
-  <h1 class="mb-6 font-death-note text-5xl tracking-wide text-white drop-shadow-2xl">Death Note</h1>
+<div
+  class="write-page flex min-h-[calc(100dvh-4rem)] flex-col items-center justify-center px-4 py-10"
+>
+  <div
+    class="w-full max-w-lg rounded border border-[#0a0a0c] bg-notebook-spine p-2 pl-[18px] shadow-notebook-cover"
+  >
+    <div
+      class="relative flex min-h-[30rem] flex-col overflow-hidden bg-paper bg-notebook px-8 pb-10 pl-[4.25rem] pt-8 text-ash-900 shadow-notebook-inset before:pointer-events-none before:absolute before:inset-y-0 before:left-[2.85rem] before:w-0.5 before:bg-blood-700/40 before:content-['']"
+    >
+      <h1 class="mb-8 text-5xl leading-[1.15] tracking-wide text-ash-900">Death Note</h1>
 
-  @if (!hasWritten()) {
-    <input
-      type="text"
-      placeholder="Name"
-      [(ngModel)]="name"
-      class="name-input mb-4 rounded-lg px-4 py-2 bg-shinigami-800 text-bone placeholder-shinigami-400 focus:outline-none focus:ring-2 focus:ring-shinigami-300 w-full max-w-xs shadow"
-    />
-    <button
-      (click)="writeInNote()"
-      [disabled]="!name.trim()"
-      [class.text-shinigami-400]="!name.trim()"
-      class="bg-shinigami-600 hover:bg-shinigami-700 text-bone font-semibold px-6 py-2 rounded-lg shadow transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-shinigami-400 disabled:opacity-50 disabled:cursor-not-allowed"
-    >
-      Write in the Death Note
-    </button>
-  } @else {
-    <p
-      class="result mb-6 text-lg text-center bg-shinigami-700 px-6 py-4 rounded-lg shadow max-w-md"
-    >
-      <strong class="text-shinigami-300 font-bold">{{ name }} </strong> will die by
-      <span class="italic">{{ causeOfDeath }}</span> in {{ countdown() | countdownFormat }}.
-    </p>
-    <button
-      (click)="reset()"
-      class="bg-shinigami-300 hover:bg-shinigami-400 text-shinigami-900 font-semibold px-6 py-2 rounded-lg shadow transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-shinigami-200"
-    >
-      Write another
-    </button>
-  }
+      @if (!hasWritten()) {
+        <div class="flex flex-1 flex-col justify-between gap-8">
+          <input
+            id="victim-name"
+            type="text"
+            aria-label="Name"
+            placeholder="Write a name..."
+            [(ngModel)]="name"
+            class="w-full appearance-none rounded-none border-0 border-b-2 border-ash-500/70 bg-transparent px-0 font-death-note text-3xl leading-tight text-ash-900 caret-ash-900 placeholder:text-ash-500/80 focus:border-blood-700 focus:outline-none focus:ring-0 autofill:shadow-[inset_0_0_0_1000px_var(--color-paper)] autofill:[-webkit-text-fill-color:var(--color-ash-900)]"
+          />
+          <button
+            (click)="writeInNote()"
+            [disabled]="!name.trim()"
+            class="self-end rounded-sm bg-blood-800 px-5 py-2 font-semibold tracking-wide text-bone shadow-sm transition-colors duration-150 hover:bg-blood-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blood-400 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-blood-800"
+          >
+            Write
+          </button>
+        </div>
+      } @else {
+        <div class="flex flex-1 flex-col justify-between gap-8">
+          <div>
+            <p class="font-death-note text-4xl tracking-wide text-ash-900">{{ name }}</p>
+            <p class="italic text-ash-700">will die by {{ causeOfDeath }}</p>
+            <p class="font-death-note text-2xl tracking-wide text-blood-700">
+              in {{ countdown() | countdownFormat }}
+            </p>
+          </div>
+          <button
+            (click)="reset()"
+            class="self-end rounded-sm border border-ash-700 px-5 py-2 font-semibold text-ash-900 transition-colors duration-150 hover:bg-ash-200/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-ash-500"
+          >
+            Write another
+          </button>
+        </div>
+      }
+    </div>
+  </div>
 </div>

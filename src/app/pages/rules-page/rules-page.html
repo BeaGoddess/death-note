@@ -1,23 +1,22 @@
-<div
-  class="font-death-note rules-page max-w-xl border border-shinigami-700 mx-auto mt-8 p-8 bg-shinigami-900 rounded-md shadow-lg"
->
-  <h1 class="text-4xl mb-6 text-center text-shinigami-100 tracking-wide font-bold">Rules</h1>
-  <h3 class="text-2xl mb-10 text-center text-shinigami-100 tracking-wide font-bold">
-    How to use the Death Note
-  </h3>
+<div class="mx-auto max-w-3xl px-4 py-10">
+  <header class="mb-12 text-center">
+    <p class="mb-3 font-death-note text-lg text-blood-800">How to use it</p>
+    <h1 class="text-5xl tracking-wide text-blood-800">Rules</h1>
+  </header>
+
   @if (rules.length > 0) {
-    <ul class="list-none p-0 m-0">
+    <ol class="m-0 flex list-none flex-col gap-8 p-0">
       @for (rule of rules; let i = $index; track rule) {
-        <li class="mb-5 text-shinigami-100 text-xl relative flex items-start">
+        <li class="flex items-start gap-5">
           <span
-            class="mr-3 text-shinigami-400 text-4xl font-extrabold select-none deathnote-letter-style"
+            class="w-12 shrink-0 select-none font-death-note text-3xl leading-none text-blood-600"
             >#{{ i + 1 }}</span
           >
-          <span>{{ rule }}</span>
+          <p class="text-lg leading-relaxed text-ash-900">{{ rule }}</p>
         </li>
       }
-    </ul>
+    </ol>
   } @else {
-    <p class="text-center text-shinigami-500 text-base italic">No rules yet. Chaos reigns.</p>
+    <p class="text-center text-base italic text-blood-400">No rules yet. Chaos reigns.</p>
   }
 </div>

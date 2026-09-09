@@ -1,0 +1,27 @@
+<header class="sticky top-0 z-50 h-16 border-b border-shinigami-800 bg-void/95 backdrop-blur">
+  <div class="mx-auto flex h-full max-w-5xl items-center justify-between px-4">
+    <a
+      routerLink="/"
+      class="font-death-note text-2xl tracking-wide text-bone hover:text-shinigami-200 transition-colors"
+    >
+      Death Note
+    </a>
+
+    <nav class="flex items-center gap-5 sm:gap-8" aria-label="Main">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+          ariaCurrentWhenActive="page"
+          class="font-death-note text-lg tracking-wide text-ash-300 transition-colors hover:text-bone aria-[current=page]:text-blood-400"
+        >
+          {{ link.label }}
+          @if (link.path === '/victims' && victimsService.count() > 0) {
+            <span class="text-blood-400">({{ victimsService.count() }})</span>
+          }
+        </a>
+      }
+    </nav>
+  </div>
+</header>

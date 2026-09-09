@@ -1,0 +1,26 @@
+<div class="mx-auto max-w-lg px-4 py-10">
+  <div
+    class="rounded border border-[#0a0a0c] bg-notebook-spine p-2 pl-[18px] shadow-notebook-cover"
+  >
+    <div
+      class="relative min-h-[30rem] overflow-hidden bg-paper bg-notebook px-8 pb-10 pl-[4.25rem] pt-8 text-ash-900 shadow-notebook-inset before:pointer-events-none before:absolute before:inset-y-0 before:left-[2.85rem] before:w-0.5 before:bg-blood-700/40 before:content-['']"
+    >
+      <div class="mb-8 flex items-baseline justify-between gap-4">
+        <h1 class="text-3xl leading-[1.15] tracking-wide text-ash-900 sm:text-4xl">The Notebook</h1>
+        <span class="shrink-0 whitespace-nowrap text-sm tracking-wide text-ash-600"
+          >{{ victimsService.count() }} written</span
+        >
+      </div>
+
+      @if (victimsService.victims().length === 0) {
+        <p class="italic text-ash-600">No one's been written yet.</p>
+      } @else {
+        <div class="flex flex-col">
+          @for (victim of victimsService.victims(); track victim.id) {
+            <app-victim-card [victim]="victim" (revived)="victimsService.removeVictim($event)" />
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
