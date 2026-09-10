@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Victim } from '../types/victim';
+import { Victim } from '../../types/victim';
 import { VictimsRepository } from './victims-repository.token';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class HttpVictimsRepository implements VictimsRepository {

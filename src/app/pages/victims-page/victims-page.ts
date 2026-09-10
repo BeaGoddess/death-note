@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { VictimCard } from '../../components/victim-card/victim-card';
-import { VictimsService } from '../../services/victims';
+import { VictimsService } from '../../services/victims/victims';
 
 @Component({
   imports: [VictimCard],

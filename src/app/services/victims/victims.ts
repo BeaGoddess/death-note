@@ -1,12 +1,12 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { Victim } from '../types/victim';
-import { VICTIMS_REPOSITORY } from './victims-repository.token';
+import { Victim } from '../../types/victim';
+import { VictimsRepositoryToken } from './victims-repository.token';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VictimsService {
-  private repository = inject(VICTIMS_REPOSITORY);
+  private repository = inject(VictimsRepositoryToken);
   private _victims = signal<Victim[]>([]);
 
   // readonly accessor for the victims signal, only this class can mutate it

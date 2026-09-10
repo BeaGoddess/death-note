@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { VictimsService } from '../../services/victims';
+import { VictimsService } from '../../services/victims/victims';
 
 @Component({
   imports: [RouterLink, RouterLinkActive],

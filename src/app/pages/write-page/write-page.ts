@@ -2,7 +2,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { interval, map, take } from 'rxjs';
 import { CountdownFormatPipe } from '../../pipes/countdown-format-pipe';
-import { VictimsService } from '../../services/victims';
+import { VictimsService } from '../../services/victims/victims';
 
 @Component({
   imports: [FormsModule, CountdownFormatPipe],

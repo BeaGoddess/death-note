@@ -1,6 +1,6 @@
 import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Victim } from '../types/victim';
+import { Victim } from '../../types/victim';
 import { VictimsRepository } from './victims-repository.token';
 import { isPlatformBrowser } from '@angular/common';
 
