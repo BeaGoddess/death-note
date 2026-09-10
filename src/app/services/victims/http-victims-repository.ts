@@ -24,6 +24,10 @@ export class HttpVictimsRepository implements VictimsRepository {
     return this.http.post<Victim>(this.apiUrl, newVictim);
   }
 
+  search(name: string): Observable<Victim[]> {
+    return this.http.get<Victim[]>(`${this.apiUrl}${name ? `?name:contains=${name}` : ''}`);
+  }
+
   remove(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }

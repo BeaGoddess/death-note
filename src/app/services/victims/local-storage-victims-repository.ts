@@ -40,6 +40,10 @@ export class LocalStorageVictimsRepository implements VictimsRepository {
     return of(newVictim);
   }
 
+  search(name: string): Observable<Victim[]> {
+    return of(this.readAll().filter((v) => v.name.toLowerCase().includes(name.toLowerCase())));
+  }
+
   remove(id: string): Observable<void> {
     this.writeAll(this.readAll().filter((v) => v.id !== id));
     return of(void 0);

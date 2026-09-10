@@ -12,11 +12,13 @@
         >
       </div>
 
-      @if (victimsService.victims().length === 0) {
+      <input type="text" placeholder="Search by name" [(ngModel)]="victimsService.searchTerm" />
+
+      @if (victimsService.displayedVictims().length === 0) {
         <p class="italic text-ash-600">No one's been written yet.</p>
       } @else {
         <div class="flex flex-col">
-          @for (victim of victimsService.victims(); track victim.id) {
+          @for (victim of victimsService.displayedVictims(); track victim.id) {
             <app-victim-card [victim]="victim" (revived)="victimsService.removeVictim($event)" />
           }
         </div>

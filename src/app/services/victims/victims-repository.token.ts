@@ -6,6 +6,7 @@ export interface VictimsRepository {
   load(): Observable<Victim[]>;
   add(name: string, causeOfDeath: string): Observable<Victim>;
   remove(id: string): Observable<void>;
+  search(name: string): Observable<Victim[]>;
 }
 
 export const VictimsRepositoryToken = new InjectionToken<VictimsRepository>(
