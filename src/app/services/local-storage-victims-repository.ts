@@ -1,0 +1,38 @@
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Victim } from '../types/victim';
+import { VictimsRepository } from './victims-repository.token';
+
+const STORAGE_KEY = 'death-note-victims';
+
+@Injectable()
+export class LocalStorageVictimsRepository implements VictimsRepository {
+  private readAll(): Victim[] {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }
+
+  private writeAll(victims: Victim[]): void {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(victims));
+  }
+
+  load(): Observable<Victim[]> {
+    return of(this.readAll());
+  }
+
+  add(name: string, causeOfDeath: string): Observable<Victim> {
+    const newVictim: Victim = {
+      id: crypto.randomUUID(),
+      name,
+      causeOfDeath,
+      writtenAt: new Date(),
+    };
+    this.writeAll([...this.readAll(), newVictim]);
+    return of(newVictim);
+  }
+
+  remove(id: string): Observable<void> {
+    this.writeAll(this.readAll().filter((v) => v.id !== id));
+    return of(void 0);
+  }
+}

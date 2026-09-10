@@ -1,0 +1,29 @@
+{
+  "victims": [
+    {
+      "id": "4",
+      "name": "Daniela",
+      "causeOfDeath": "drowned in a river",
+      "writtenAt": "2026-09-09T10:00:00.000Z"
+    },
+    {
+      "id": "EyXdXDjqt0s",
+      "name": "Ricardo Costa",
+      "causeOfDeath": "playing too much video games and forgetting to eat",
+      "writtenAt": "2026-09-10T13:22:42.134Z"
+    },
+    {
+      "id": "6dLpw9jGDbQ",
+      "name": "Rui",
+      "causeOfDeath": "being tripped over a rake while running from responsibilities",
+      "writtenAt": "2026-09-10T13:22:48.964Z"
+    },
+    {
+      "id": "NZlUuzEmNjk",
+      "name": "Diogo",
+      "causeOfDeath": "laughing at their own joke",
+      "writtenAt": "2026-09-10T13:22:52.471Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
