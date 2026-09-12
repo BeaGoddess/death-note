@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Header } from './header';
+import { VictimsRepositoryToken } from '../../services/victims/victims-repository.token';
+import { FakeVictimsRepository } from '../../services/victims/fake-victims-repository';
 
 describe('Header', () => {
   let component: Header;
@@ -9,7 +11,10 @@ describe('Header', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Header],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        { provide: VictimsRepositoryToken, useClass: FakeVictimsRepository },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Header);

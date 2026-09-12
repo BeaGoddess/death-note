@@ -1,12 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { App } from './app';
+import { VictimsRepositoryToken } from './services/victims/victims-repository.token';
+import { FakeVictimsRepository } from './services/victims/fake-victims-repository';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        { provide: VictimsRepositoryToken, useClass: FakeVictimsRepository },
+      ],
     }).compileComponents();
   });
 

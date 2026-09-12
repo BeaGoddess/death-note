@@ -12,6 +12,13 @@ describe('VictimCard', () => {
 
     fixture = TestBed.createComponent(VictimCard);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('victim', {
+      id: crypto.randomUUID(),
+      name: 'Ricardo Costa',
+      causeOfDeath: 'playing Genshin Impact with Rittachi',
+      writtenAt: new Date(),
+    });
     await fixture.whenStable();
   });
 
