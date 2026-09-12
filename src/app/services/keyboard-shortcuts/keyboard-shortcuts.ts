@@ -1,4 +1,4 @@
-import { afterNextRender, inject, Injectable, OnInit } from '@angular/core';
+import { afterNextRender, inject, Injectable } from '@angular/core';
 import { DestroyRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
@@ -27,22 +27,23 @@ export class KeyboardShortcuts {
     }
   }
 
+  private boundHandleKeydown = this.handleKeydown.bind(this);
+
   constructor() {
     afterNextRender(() => {
       if (this.version === 1) {
         fromEvent<KeyboardEvent>(document, 'keydown')
           .pipe(takeUntilDestroyed(this.destroyRef))
-          // this is cool because we can also unsubscribe the event using takeUntilDestroyed
           .subscribe((event) => this.handleKeydown(event));
 
         return;
       }
 
       if (this.version === 2) {
-        document.addEventListener('keydown', this.handleKeydown.bind(this));
+        document.addEventListener('keydown', this.boundHandleKeydown);
 
         this.destroyRef.onDestroy(() => {
-          document.removeEventListener('keydown', this.handleKeydown.bind(this));
+          document.removeEventListener('keydown', this.boundHandleKeydown);
         });
       }
     });

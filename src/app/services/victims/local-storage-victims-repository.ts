@@ -25,11 +25,11 @@ export class LocalStorageVictimsRepository implements VictimsRepository {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(victims));
   }
 
-  load(): Observable<Victim[]> {
-    return of(this.readAll());
+  load(): Promise<Victim[]> {
+    return Promise.resolve(this.readAll());
   }
 
-  add(name: string, causeOfDeath: string): Observable<Victim> {
+  add(name: string, causeOfDeath: string): Promise<Victim> {
     const newVictim: Victim = {
       id: crypto.randomUUID(),
       name,
@@ -37,15 +37,17 @@ export class LocalStorageVictimsRepository implements VictimsRepository {
       writtenAt: new Date(),
     };
     this.writeAll([...this.readAll(), newVictim]);
-    return of(newVictim);
+    return Promise.resolve(newVictim);
   }
 
-  search(name: string): Observable<Victim[]> {
-    return of(this.readAll().filter((v) => v.name.toLowerCase().includes(name.toLowerCase())));
+  search(name: string): Promise<Victim[]> {
+    return Promise.resolve(
+      this.readAll().filter((v) => v.name.toLowerCase().includes(name.toLowerCase())),
+    );
   }
 
-  remove(id: string): Observable<void> {
+  remove(id: string): Promise<void> {
     this.writeAll(this.readAll().filter((v) => v.id !== id));
-    return of(void 0);
+    return Promise.resolve(void 0);
   }
 }

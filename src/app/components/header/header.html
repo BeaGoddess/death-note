@@ -17,8 +17,8 @@
           class="font-death-note text-lg tracking-wide text-ash-300 transition-colors hover:text-bone aria-[current=page]:text-blood-400"
         >
           {{ link.label }}
-          @if (link.path === '/victims' && victimsService.count() > 0) {
-            <span class="text-blood-400">({{ victimsService.count() }})</span>
+          @if (link.path === '/victims' && victimsService.victims().length > 0) {
+            <span class="text-blood-400">({{ victimsService.victims().length }})</span>
           }
         </a>
       }

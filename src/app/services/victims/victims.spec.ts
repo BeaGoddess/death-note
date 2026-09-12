@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { VictimsService } from './victims';
 import { VictimsRepositoryToken } from './victims-repository.token';
-import { vi } from 'vitest';
 import { FakeVictimsRepository } from './fake-victims-repository';
+import { ApplicationRef } from '@angular/core';
 
 describe('VictimsService', () => {
   let service: VictimsService;
@@ -20,33 +20,37 @@ describe('VictimsService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should add a victim', () => {
-    service.addVictim(victimName, victimCauseOfDeath);
+  it('should add a victim', async () => {
+    await service.addVictim(victimName, victimCauseOfDeath);
+    await TestBed.inject(ApplicationRef).whenStable();
+
     expect(service.victims().length).toBe(1);
     expect(service.victims()[0].name).toBe(victimName);
     expect(service.victims()[0].causeOfDeath).toBe(victimCauseOfDeath);
     expect(service.victims()[0].writtenAt).toBeInstanceOf(Date);
   });
 
-  it('should remove a victim', () => {
-    service.addVictim(victimName, victimCauseOfDeath);
-    service.removeVictim(service.victims()[0].id);
+  it('should remove a victim', async () => {
+    await service.addVictim(victimName, victimCauseOfDeath);
+    await TestBed.inject(ApplicationRef).whenStable();
+
+    await service.removeVictim(service.victims()[0].id);
+    await TestBed.inject(ApplicationRef).whenStable();
+
     expect(service.victims().length).toBe(0);
   });
 
-  it('should search for a victim', () => {
-    vi.useFakeTimers();
-
-    service.addVictim(victimName, victimCauseOfDeath);
-    service.addVictim('Beatriz Silva', 'learning Angular without resting');
+  it('should search for a victim', async () => {
+    await service.addVictim(victimName, victimCauseOfDeath);
+    await service.addVictim('Beatriz Silva', 'learning Angular without resting');
+    await TestBed.inject(ApplicationRef).whenStable();
 
     service.searchTerm.set('Beatriz');
-    TestBed.flushEffects();
-    vi.advanceTimersByTime(300);
 
-    expect(service.displayedVictims().length).toBe(1);
-    expect(service.displayedVictims()[0].name).toBe('Beatriz Silva');
+    await new Promise((resolve) => setTimeout(resolve, 350));
+    await TestBed.inject(ApplicationRef).whenStable();
 
-    vi.useRealTimers();
+    expect(service.victims().length).toBe(1);
+    expect(service.victims()[0].name).toBe('Beatriz Silva');
   });
 });

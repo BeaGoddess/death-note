@@ -1,4 +1,3 @@
-import { of } from 'rxjs';
 import { VictimsRepository } from './victims-repository.token';
 import { Victim } from '../../types/victim';
 
@@ -6,7 +5,7 @@ export class FakeVictimsRepository implements VictimsRepository {
   private victims: Victim[] = [];
 
   load() {
-    return of(this.victims);
+    return Promise.resolve(this.victims);
   }
 
   add(name: string, causeOfDeath: string) {
@@ -17,16 +16,16 @@ export class FakeVictimsRepository implements VictimsRepository {
       writtenAt: new Date(),
     };
     this.victims.push(victim);
-    return of(victim);
+    return Promise.resolve(victim);
   }
 
   remove(id: string) {
     this.victims = this.victims.filter((v) => v.id !== id);
-    return of(void 0);
+    return Promise.resolve(void 0);
   }
 
   search(name: string) {
     const filtered = this.victims.filter((v) => v.name.toLowerCase().includes(name.toLowerCase()));
-    return of(filtered);
+    return Promise.resolve(filtered);
   }
 }
