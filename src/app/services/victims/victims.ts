@@ -1,14 +1,13 @@
-import { computed, inject, Injectable, resource, signal } from '@angular/core';
+import { computed, inject, Injectable, resource, Service, signal } from '@angular/core';
 import { Victim } from '../../types/victim';
-import { VictimsRepositoryToken } from './victims-repository.token';
+import { RepositoryToken } from '../global/repository-token';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class VictimsService {
-  private repository = inject(VictimsRepositoryToken);
+  private victimsPath = 'victims';
+  private repository = inject(RepositoryToken);
 
   searchTerm = signal<string>('');
   debouncedSearchTerm = toSignal(
@@ -18,7 +17,10 @@ export class VictimsService {
 
   victimsResource = resource({
     params: () => this.debouncedSearchTerm(),
-    loader: ({ params: term }) => (term ? this.repository.search(term) : this.repository.load()),
+    loader: ({ params: term }) =>
+      term
+        ? this.repository.findBy(this.victimsPath, `name=${term}`)
+        : this.repository.getAll(this.victimsPath),
     defaultValue: [] as Victim[],
   });
 
@@ -36,7 +38,7 @@ export class VictimsService {
 
   async addVictim(name: string, causeOfDeath: string) {
     try {
-      await this.repository.add(name, causeOfDeath);
+      await this.repository.post(this.victimsPath, { name, causeOfDeath });
       this.reload();
     } catch (err) {
       console.error('Failed to add victim', err);
@@ -45,7 +47,7 @@ export class VictimsService {
 
   async removeVictim(id: string) {
     try {
-      await this.repository.remove(id);
+      await this.repository.delete(this.victimsPath, id);
       this.reload();
     } catch (err) {
       console.error('Failed to remove victim', err);

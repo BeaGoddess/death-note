@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { VictimsService } from './victims';
-import { VictimsRepositoryToken } from './victims-repository.token';
-import { FakeVictimsRepository } from './fake-victims-repository';
+import { RepositoryToken } from '../global/repository-token';
 import { ApplicationRef } from '@angular/core';
+import { FakeRepository } from '../global/fake-repository';
 
 describe('VictimsService', () => {
   let service: VictimsService;
@@ -11,7 +11,7 @@ describe('VictimsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: VictimsRepositoryToken, useClass: FakeVictimsRepository }],
+      providers: [{ provide: RepositoryToken, useClass: FakeRepository }],
     });
     service = TestBed.inject(VictimsService);
   });
@@ -27,7 +27,7 @@ describe('VictimsService', () => {
     expect(service.victims().length).toBe(1);
     expect(service.victims()[0].name).toBe(victimName);
     expect(service.victims()[0].causeOfDeath).toBe(victimCauseOfDeath);
-    expect(service.victims()[0].writtenAt).toBeInstanceOf(Date);
+    expect(new Date(service.victims()[0].writtenAt)).toBeInstanceOf(Date);
   });
 
   it('should remove a victim', async () => {
